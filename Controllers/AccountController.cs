@@ -43,5 +43,13 @@ namespace SistemaEstoque.Controllers
             TempData["MensagemSucesso"] = $"Usuário: {user.UserName} Criado com sucesso!";
             return View();
         }
+
+        public IActionResult Login() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginUserDto loginUserDto)
+        {
+
+        }
     }
 }

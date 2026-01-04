@@ -1,0 +1,39 @@
+﻿@using SistemaEstoque.Dtos
+@model LoginUserDto
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success text-dark" role="alert">
+        @TempData["MensagemSucesso"]
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-success text-dark" role="alert">
+        @TempData["MensagemErro"]
+    </div>
+}
+
+<div class="container" style="max-width: 400px; margin-top: 50px;">
+    <h2 class="text-center mb-4">Login</h2>
+    <form asp-action="Login" method="post">
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">E-mail</label>
+            <input asp-for="Email" class="form-control" placeholder="Digite seu e-mail" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Senha" class="form-label">Senha</label>
+            <input asp-for="Senha" type="password" class="form-control"placeholder="Digite sua senha" />
+            <span asp-validation-for="Senha" class="text-danger"></span>
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </div>
+    </form>
+</div>
