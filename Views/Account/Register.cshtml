@@ -1,0 +1,29 @@
+﻿@using SistemaEstoque.Dtos
+@model RegisterUserDto
+@{
+    ViewData["Title"] = "Cadastrar Usuário";
+}
+<h2>Cadastro de Usuário</h2>
+<form method="post" asp-action="Register">
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="email" class="form-control" id="Email" asp-for="Email" />
+    </div>
+    <div class="form-group">
+        <label for="Senha">Senha</label>
+        <input type="password" class="form-control" id="Senha" asp-for="Senha" />
+    </div>
+    <div class="form-group">
+        <label for="ConfirmarSenha">Confirmar Senha</label>
+        <input type="password" class="form-control" id="ConfirmarSenha"
+               asp-for="ConfirmaSenha" />
+    </div>
+    <div class="form-group">
+        <label for="Perfil">Perfil</label>
+        <select class="form-control" id="Perfil" asp-for="Perfil">
+            <option value="Admin">Admin</option>
+            <option value="Estoquista">Estoquista</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Cadastrar</button>
+</form>
