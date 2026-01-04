@@ -14,3 +14,4 @@
 /obj/project.nuget.cache
 /.vs/SistemaEstoque/FileContentIndex/a5cc4510-6ccc-43bd-b9c3-41eadc58cc6b.vsidx
 /.vs/SistemaEstoque/FileContentIndex/a5d0e4b6-c390-44ca-9490-ad972402866b.vsidx
+*.vsidx
