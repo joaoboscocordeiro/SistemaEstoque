@@ -6,5 +6,6 @@ Aplicação Sistema de Estoque
 ## APLICAÇÃO ASP.NET Core 9.0 C#
 
 #### 1 - Linguagem C#
+#### 2 - Banco de Dados SQLServer
 
 ----------------------------------------------------------------------------------------------------
