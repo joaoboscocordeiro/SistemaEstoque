@@ -8,10 +8,17 @@ namespace SistemaEstoque.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        public AccountController(
+            UserManager<IdentityUser> userManager, 
+            RoleManager<IdentityRole> roleManager,
+            SignInManager<IdentityUser> signInManager
+            )
         {    
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -47,9 +54,20 @@ namespace SistemaEstoque.Controllers
         public IActionResult Login() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginUserDto loginUserDto)
+        public async Task<IActionResult> Login(LoginUserDto loginDto)
         {
+            if (!ModelState.IsValid) return View(loginDto);
 
+            var result = await _signInManager.PasswordSignInAsync(loginDto.Email, loginDto.Senha, true, false);
+
+            if (result.Succeeded)
+            {
+                TempData["MensagemSucesso"] = $"Usuário: {loginDto.Email} Logado com sucesso!";
+                return RedirectToAction("Index", "Home");
+            }
+
+            TempData["MensagemErro"] = "Ocorreu um erro no processo!";
+            return View();
         }
     }
 }
