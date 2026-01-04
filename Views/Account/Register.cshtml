@@ -4,19 +4,36 @@
     ViewData["Title"] = "Cadastrar Usuário";
 }
 <h2>Cadastro de Usuário</h2>
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success text-dark" role="alert">
+        @TempData["MensagemSucesso"]
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-success text-dark" role="alert">
+        @TempData["MensagemErro"]
+    </div>
+}
+
 <form method="post" asp-action="Register">
     <div class="form-group">
         <label for="Email">Email</label>
         <input type="email" class="form-control" id="Email" asp-for="Email" />
+        <span class="text-danger" asp-validation-for="Email"></span>
     </div>
     <div class="form-group">
         <label for="Senha">Senha</label>
         <input type="password" class="form-control" id="Senha" asp-for="Senha" />
+        <span class="text-danger" asp-validation-for="Senha"></span>
     </div>
     <div class="form-group">
         <label for="ConfirmarSenha">Confirmar Senha</label>
-        <input type="password" class="form-control" id="ConfirmarSenha"
-               asp-for="ConfirmaSenha" />
+        <input type="password" class="form-control" id="ConfirmarSenha" asp-for="ConfirmaSenha" />
+        <span class="text-danger" asp-validation-for="ConfirmaSenha"></span>
     </div>
     <div class="form-group">
         <label for="Perfil">Perfil</label>
