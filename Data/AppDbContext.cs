@@ -11,7 +11,7 @@ namespace SistemaEstoque.Data
         }
 
         public DbSet<Produto> Produtos { get; set; }
-        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<CategoriaModel> Categorias { get; set; }
         public DbSet<MovimentacoesEstoque> MovimentacoesEstoque { get; set; }
     }
 }

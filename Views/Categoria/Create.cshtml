@@ -1,0 +1,24 @@
+﻿@using SistemaEstoque.Dtos
+@model CreateCategoriaDto
+
+@{
+    ViewData["Title"] = "Nova Categoria";
+}
+
+<div class="container mt-4">
+    <h2><i class="bi bi-plus-circle-fill"></i> Nova Categoria</h2>
+    <hr />
+    <form asp-action="Create" method="post" class="mt-3">
+        <div class="mb-3">
+            <label asp-for="Descricao" class="form-label"></label>
+            <input asp-for="Descricao" class="form-control" placeholder="Digite a descrição" />
+            <span asp-validation-for="Descricao" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-success">
+            <i class="bi bi-check-circle"></i>Salvar
+        </button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary ms-2">
+            <i class="bi bi-arrow-left"></i>Voltar
+        </a>
+    </form>
+</div>

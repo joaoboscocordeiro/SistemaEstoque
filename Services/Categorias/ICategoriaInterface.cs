@@ -1,9 +1,13 @@
-﻿using SistemaEstoque.Models;
+﻿using SistemaEstoque.Dtos;
+using SistemaEstoque.Models;
 
 namespace SistemaEstoque.Services.Categorias
 {
     public interface ICategoriaInterface
     {
-        Task<List<Categoria>> ObterTodasCategorias();
+        Task<List<CategoriaModel>> ObterTodasCategorias();
+        Task<ResponseModel<CategoriaModel>> AdicionarCategoria(CreateCategoriaDto createCategoriaDto);
+        Task<CategoriaModel> RemoverCategoria(int id);
+        Task<ResponseModel<string>> DeleterCategoria(int id);
     }
 }
