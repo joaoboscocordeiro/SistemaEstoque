@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SistemaEstoque.Data;
+using SistemaEstoque.Services.Categorias;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 })
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<ICategoriaInterface, CategoriaService>();
 
 var app = builder.Build();
 
