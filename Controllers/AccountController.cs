@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SistemaEstoque.Dtos;
+using SistemaEstoque.Dtos.Usuario;
 
 namespace SistemaEstoque.Controllers
 {

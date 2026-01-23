@@ -1,8 +1,6 @@
 ﻿using Azure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using SistemaEstoque.Dtos;
-using SistemaEstoque.Models;
+using SistemaEstoque.Dtos.Categoria;
 using SistemaEstoque.Services.Categorias;
 
 namespace SistemaEstoque.Controllers

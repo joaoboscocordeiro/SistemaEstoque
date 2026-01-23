@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SistemaEstoque.Data;
-using SistemaEstoque.Dtos;
+using SistemaEstoque.Dtos.Categoria;
 using SistemaEstoque.Models;
 
 namespace SistemaEstoque.Services.Categorias
