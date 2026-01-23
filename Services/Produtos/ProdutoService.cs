@@ -1,10 +1,19 @@
-﻿using SistemaEstoque.Dtos.Produto;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaEstoque.Data;
+using SistemaEstoque.Dtos.Produto;
 using SistemaEstoque.Models;
 
 namespace SistemaEstoque.Services.Produtos
 {
     public class ProdutoService : IProdutoInterface
     {
+        private readonly AppDbContext _context;
+
+        public ProdutoService(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public Task<ResponseModel<string>> AdicionarAsync(ProdutoDto produtoDto)
         {
             throw new NotImplementedException();
@@ -15,14 +24,14 @@ namespace SistemaEstoque.Services.Produtos
             throw new NotImplementedException();
         }
 
-        public Task<Produto> ObterPorIdAsync(int id)
+        public async Task<Produto> ObterPorIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Produtos.Include(c => c.Categoria).FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public Task<List<Produto>> ObterTodosAsync()
+        public async Task<List<Produto>> ObterTodosAsync()
         {
-            throw new NotImplementedException();
+           return await _context.Produtos.Include(c => c.Categoria).ToListAsync();
         }
 
         public Task<ResponseModel<string>> RemoverAsync(int id)
