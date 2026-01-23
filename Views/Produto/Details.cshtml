@@ -1,0 +1,38 @@
+﻿@model Produto
+@{
+    ViewData["Title"] = "Detalhes do Produto";
+}
+
+<h2 class="mb-4">Detalhes do Produto</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        @if (Model.Imagem != null)
+        {
+            <img src="@Url.Action("Imagem", new { id = Model.Id })"
+                 class="img-fluid rounded shadow" />
+        }
+    </div>
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-4">Nome:</dt>
+            <dd class="col-sm-8">@Model.Nome</dd>
+            <dt class="col-sm-4">Descrição:</dt>
+            <dd class="col-sm-8">@Model.Descricao</dd>
+            <dt class="col-sm-4">Categoria:</dt>
+            <dd class="col-sm-8">@Model.Categoria.Descricao</dd>
+            <dt class="col-sm-4">Preço:</dt>
+            <dd class="col-sm-8">@Model.Preco?.ToString("C")</dd>
+            <dt class="col-sm-4">Quantidade:</dt>
+            <dd class="col-sm-8">@Model.Quantidade</dd>
+            <dt class="col-sm-4">Código:</dt>
+            <dd class="col-sm-8">@Model.Codigo</dd>
+        </dl>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warningme-2">
+            <i class="bi bi-pencil"></i> Editar
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+    </div>
+</div>
