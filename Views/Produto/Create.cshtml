@@ -1,0 +1,21 @@
+﻿@using SistemaEstoque.Dtos.Produto
+@model ProdutoDto
+
+@{
+    ViewData["Title"] = "Novo Produto";
+}
+
+<h2 class="mb-4">Novo Produto</h2>
+
+<form asp-action="Create" enctype="multipart/form-data" class="row g-3">
+    @Html.AntiForgeryToken()
+    <partial name="_FormFields" model="Model" />
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">
+            <i class="bi bi-check-circle"></i> Salvar
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+    </div>
+</form>

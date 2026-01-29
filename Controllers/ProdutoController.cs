@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using SistemaEstoque.Dtos.Produto;
 using SistemaEstoque.Services.Categorias;
 using SistemaEstoque.Services.Produtos;
 
@@ -27,6 +29,18 @@ namespace SistemaEstoque.Controllers
             if (produto == null) return NotFound();
 
             return View(produto);
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            var categorias = await _categoriaInterface.ObterTodasCategorias();
+
+            var produtoDto = new ProdutoDto
+            {
+                Categorias = new SelectList(categorias, "Id", "Descricao")
+            };
+
+            return View(produtoDto);
         }
     }
 }
