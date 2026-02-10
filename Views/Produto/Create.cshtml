@@ -5,9 +5,23 @@
     ViewData["Title"] = "Novo Produto";
 }
 
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success text-dark" role="alert">
+        @TempData["MensagemSucesso"]
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger text-dark" role="alert">
+        @TempData["MensagemErro"]
+    </div>
+}
+
 <h2 class="mb-4">Novo Produto</h2>
 
-<form asp-action="Create" enctype="multipart/form-data" class="row g-3">
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="row g-3">
     @Html.AntiForgeryToken()
     <partial name="_FormFields" model="Model" />
     <div class="col-12">

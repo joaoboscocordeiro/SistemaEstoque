@@ -42,5 +42,29 @@ namespace SistemaEstoque.Controllers
 
             return View(produtoDto);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(ProdutoDto produtoDto)
+        {
+            var categorias = await _categoriaInterface.ObterTodasCategorias();
+
+            if (ModelState.IsValid)
+            {
+                var response = await _produtoInterface.AdicionarAsync(produtoDto);
+
+                if (!response.Status)
+                {
+                    TempData["MensagemErro"] = response.Mensagem;
+                    produtoDto.Categorias = new SelectList(categorias, "Id", "Descricao");
+                    return View(produtoDto);
+                }
+
+                TempData["MensagemSucesso"] = response.Mensagem;
+                return RedirectToAction("Index");
+            }
+
+            produtoDto.Categorias = new SelectList(categorias, "Id", "Descricao");
+            return View(produtoDto);
+        }
     }
 }
