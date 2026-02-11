@@ -1,0 +1,36 @@
+﻿@using SistemaEstoque.Dtos.Produto
+@model ProdutoDto
+
+@{
+    ViewData["Title"] = "Editar Produto";
+}
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success text-dark" role="alert">
+        @TempData["MensagemSucesso"]
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger text-dark" role="alert">
+        @TempData["MensagemErro"]
+    </div>
+}
+
+<h2 class="mb-4">Editar Produto</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data" class="row g-3">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <partial name="_FormFields" model="Model" />
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Atualizar
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+    </div>
+</form>
