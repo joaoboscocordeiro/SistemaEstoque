@@ -1,0 +1,72 @@
+﻿@model List<MovimentacoesEstoque>
+
+@{
+    ViewData["Title"] = "Histórico de Movimentações";
+}
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success text-dark" role="alert">
+        @TempData["MensagemSucesso"]
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger text-dark" role="alert">
+        @TempData["MensagemErro"]
+    </div>
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">
+        <i class="bi bi-clock-history me-2"></i>Histórico de Movimentações
+    </h2>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle me-1"></i> Nova Movimentação
+    </a>
+</div>
+<div class="table-responsive">
+    <table class="table table-hover table-striped align-middle shadow-sm border rounded">
+        <thead class="table-dark">
+            <tr>
+                <th><i class="bi bi-calendar-event"></i> Data</th>
+                <th><i class="bi bi-arrow-left-right"></i> Tipo</th>
+                <th><i class="bi bi-box-seam"></i> Produto</th>
+                <th><i class="bi bi-stack"></i> Quantidade</th>
+                <th><i class="bi bi-person-circle"></i> Usuário</th>
+                <th><i class="bi bi-chat-left-text"></i> Observação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                @foreach (var item in Model)
+                {
+                    var tipoBadge = item.Tipo == "Entrada" ? "success" : "danger";
+                    var tipoIcone = item.Tipo == "Entrada" ? "bi-box-arrow-in-down" : "bi-box-arrow-up";
+                    <tr>
+                        <td>@item.Data.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>
+                            <span class="badge bg-@tipoBadge">
+                                <i class="bi @tipoIcone me-1"></i>@item.Tipo
+                            </span>
+                        </td>
+                        <td>@item.Produto?.Nome</td>
+                        <td><span class="fw-bold">@item.Quantidade</span></td>
+                        <td>@item.Usuario</td>
+                        <td>@item.Observacao</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center">
+                        Não existe movimentações cadastradas.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
