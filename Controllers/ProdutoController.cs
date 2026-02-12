@@ -72,6 +72,27 @@ namespace SistemaEstoque.Controllers
             return View(produtoDto);
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            var produto = await _produtoInterface.ObterPorIdAsync(id);
+
+            if (produto == null)
+            {
+                TempData["MesagemErro"] = "Produto não encontrado";
+                return RedirectToAction("Index");
+            }
+
+            return View(produto);
+        }
+
+        public async Task<IActionResult> Imagem(int id)
+        {
+            var produto = await _produtoInterface.ObterPorIdAsync(id);
+
+            if (produto?.Imagem == null) return NotFound();
+            return File(produto.Imagem, "image/jpeg");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(ProdutoDto produtoDto)
         {
@@ -118,6 +139,21 @@ namespace SistemaEstoque.Controllers
 
             produtoDto.Categorias = new SelectList(categorias, "Id", "Descricao", produtoDto.CategoriaId);
             return View(produtoDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var response = await _produtoInterface.RemoverAsync(id);
+
+            if (!response.Status)
+            {
+                TempData["MensagemErro"] = response.Mensagem;
+                return RedirectToAction("Index");
+            }
+
+            TempData["MensagemSucesso"] = response.Mensagem;
+            return RedirectToAction("Index");
         }
     }
 }

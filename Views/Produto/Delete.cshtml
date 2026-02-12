@@ -1,0 +1,27 @@
+﻿@model Produto
+
+@{
+    ViewData["Title"] = "Excluir Produto";
+}
+
+<h2 class="mb-4 text-danger">Excluir Produto</h2>
+<div class="alert alert-warning">
+    <strong>Tem certeza que deseja excluir o produto "@Model.Nome"?</strong>
+</div>
+<dl class="row">
+    <dt class="col-sm-3">Nome:</dt>
+    <dd class="col-sm-9">@Model.Nome</dd>
+    <dt class="col-sm-3">Descrição:</dt>
+    <dd class="col-sm-9">@Model.Descricao</dd>
+    <dt class="col-sm-3">Preço:</dt>
+    <dd class="col-sm-9">@Model.Preco?.ToString("C")</dd>
+</dl>
+<form asp-action="DeleteConfirmed">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">
+        <i class="bi bi-trash"></i> Confirmar Exclusão
+    </button>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Cancelar
+    </a>
+</form>
