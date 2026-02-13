@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using SistemaEstoque.Models;
 using SistemaEstoque.Services.Movimentacoes;
 using SistemaEstoque.Services.Produtos;
-using System.Threading.Tasks;
 
 namespace SistemaEstoque.Controllers
 {
@@ -20,6 +21,31 @@ namespace SistemaEstoque.Controllers
         {
             var historico = await _movimentacaoInterface.ObterTodasAsync();
             return View(historico);
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            var produtos = await _produtoInterface.ObterTodosAsync();
+
+            ViewBag.Produtos = new SelectList(produtos, "Id", "Nome");
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(MovimentacoesEstoque mov)
+        {
+            if (ModelState.IsValid)
+            {
+                mov.Usuario = User.Identity.Name ?? "Sistema";
+                await _movimentacaoInterface.AdicionarMovimentacaoAsync(mov);
+                return RedirectToAction("Index");
+            }
+
+            var produtos = await _produtoInterface.ObterTodosAsync();
+            ViewBag.Produtos = new SelectList(produtos, "Id", "Nome");
+
+            return View();
         }
     }
 }

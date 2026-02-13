@@ -24,6 +24,7 @@ namespace SistemaEstoque.Services.Movimentacoes
 
             if (mov.Tipo == "Saida")
                 produto.Quantidade -= mov.Quantidade;
+            mov.Data = DateTime.Now;
 
             _context.MovimentacoesEstoque.Add(mov);
             await _context.SaveChangesAsync();
