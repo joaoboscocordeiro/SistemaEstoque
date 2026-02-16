@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SistemaEstoque.Data;
 using SistemaEstoque.Services.Categorias;
+using SistemaEstoque.Services.Graficos;
 using SistemaEstoque.Services.Movimentacoes;
 using SistemaEstoque.Services.Produtos;
 
@@ -26,6 +27,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 builder.Services.AddScoped<ICategoriaInterface, CategoriaService>();
 builder.Services.AddScoped<IProdutoInterface, ProdutoService>();
 builder.Services.AddScoped<IMovimentacaoInterface, MovimentacaoService>();
+builder.Services.AddScoped<IGraficoInterface, GraficoService>();
 
 var app = builder.Build();
 
