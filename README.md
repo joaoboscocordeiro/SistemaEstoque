@@ -12,3 +12,4 @@ Aplicação Sistema de Estoque
 
 <img width="1600" height="900" alt="Image" src="https://github.com/user-attachments/assets/e889052c-82d8-49a2-8aff-87db426b53d1" />
 <img width="1600" height="900" alt="Image" src="https://github.com/user-attachments/assets/668ac6bf-9ca2-4d6e-831d-5f6384ca74bc" />
+<img width="1600" height="900" alt="Image" src="https://github.com/user-attachments/assets/3f2ea9f3-bae8-4299-8a57-04eb38c5e9bb" />
