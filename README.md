@@ -9,3 +9,5 @@ Aplicação Sistema de Estoque
 #### 2 - Banco de Dados SQLServer
 
 ----------------------------------------------------------------------------------------------------
+
+<img width="1600" height="900" alt="Image" src="https://github.com/user-attachments/assets/e889052c-82d8-49a2-8aff-87db426b53d1" />
