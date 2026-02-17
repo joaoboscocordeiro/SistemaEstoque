@@ -2,7 +2,6 @@
 using SistemaEstoque.Data;
 using SistemaEstoque.Dtos.Movimentacao;
 using SistemaEstoque.Dtos.Produto;
-using System.Threading.Tasks;
 
 namespace SistemaEstoque.Services.Graficos
 {

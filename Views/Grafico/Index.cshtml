@@ -1,0 +1,150 @@
+﻿@{
+    ViewData["Title"] = "Relatórios";
+}
+
+<h2 class="mb-4">📊 Relatórios e Gráficos</h2>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <h5>📉 Produtos com Menor Estoque</h5>
+        <canvas id="graficoMenorEstoque"></canvas>
+    </div>
+    <div class="col-md-6 mb-4">
+        <h5>📈 Entradas vs. Saídas por Mês</h5>
+        <canvas id="graficoEntradasSaidas"></canvas>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <label>Período Inicial</label>
+        <input type="date" class="form-control" id="dataInicio" />
+    </div>
+    <div class="col-md-4">
+        <label>Período Final</label>
+        <input type="date" class="form-control" id="dataFim" />
+    </div>
+    <div class="col-md-4">
+        <label>Tipo</label>
+        <select class="form-select" id="tipo">
+            <option value="">Todos</option>
+            <option value="Entrada">Entrada</option>
+            <option value="Saída">Saída</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <h5>📆 Movimentações por Período</h5>
+        <canvas id="graficoMovimentacoes"></canvas>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(document).ready(function () {
+            let chartMenorEstoque;
+            let chartEntradasSaidas;
+            let chartMovimentacoes;
+
+            carregarGraficoMenorEstoque();
+            carregarGraficoEntradasSaidas();
+            carregarGraficoMovimentacoes();
+
+            $('#dataInicio, #dataFim, #tipo').change(function () {
+                carregarGraficoMovimentacoes();
+            });
+            function carregarGraficoMenorEstoque() {
+                $.get("/Grafico/ProdutosMenorEstoque", function (data) {
+                    const ctx = document.getElementById('graficoMenorEstoque');
+
+                    // Destruir o gráfico anterior, se existir
+                    if (chartMenorEstoque) {
+                        chartMenorEstoque.destroy();
+                    }
+
+                    // Criar o novo gráfico
+                    chartMenorEstoque = new Chart(ctx, {
+                        type: 'bar',
+                            data: {
+                                labels: data.map(x => x.produto),
+                                datasets: [{
+                                    label: 'Qtd em Estoque',
+                                    data: data.map(x => x.quantidade),
+                                    backgroundColor: 'rgba(255, 99, 132, 0.5)'
+                                 }]
+                            }
+                    });
+                });
+            }
+            function carregarGraficoEntradasSaidas() {
+            $.get("/Grafico/EntradasVsSaidasPorMes", function (data) {
+                const entradas = data.filter(x => x.tipo === "Entrada");
+                const saidas = data.filter(x => x.tipo === "Saída");
+
+                const meses = [...new Set(data.map(x => `${x.mes}/${x.ano}`))];
+
+                const ctx = document.getElementById('graficoEntradasSaidas');
+
+                // Destruir o gráfico anterior, se existir
+                if (chartEntradasSaidas) {
+                    chartEntradasSaidas.destroy();
+                }
+                // Criar o novo gráfico
+                chartEntradasSaidas = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: meses,
+                        datasets: [
+                            {
+                                label: 'Entradas',
+                                data: meses.map(m => {
+                                    const item = entradas.find(e => `${e.mes}/${e.ano}` === m);
+                                    return item ? item.quantidade : 0;
+                                }),
+                                backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                            },
+                        {
+                                label: 'Saídas',
+                                data: meses.map(m => {
+                                    const item = saidas.find(s => `${s.mes}/${s.ano}` === m);
+                                    return item ? item.quantidade : 0;
+                                }),
+                                backgroundColor: 'rgba(255, 159, 64, 0.5)'
+                            }
+                        ]
+                }
+                });
+            });
+        }
+            function carregarGraficoMovimentacoes() {
+                const inicio = $('#dataInicio').val();
+                const fim = $('#dataFim').val();
+                const tipo = $('#tipo').val();
+
+                $.get("/Grafico/MovimentacoesPorPeriodo", { inicio, fim, tipo }, function (data) {
+                    const ctx = document.getElementById('graficoMovimentacoes');
+
+                    // Destruir o gráfico anterior, se existir
+                    if (chartMovimentacoes) {
+                        chartMovimentacoes.destroy();
+                    }
+
+                    // Criar o novo gráfico
+                    chartMovimentacoes = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: data.map(x => x.data),
+                            datasets: [{
+                                label: 'Movimentações',
+                                data: data.map(x => x.total),
+                                backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                                fill: true
+                            }]
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+}
