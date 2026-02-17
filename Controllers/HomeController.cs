@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaEstoque.Services.Produtos;
 using System.Threading.Tasks;
 
 namespace SistemaEstoque.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IProdutoInterface _produtoInterface;

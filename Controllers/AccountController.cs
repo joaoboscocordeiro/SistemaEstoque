@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SistemaEstoque.Dtos.Usuario;
 
@@ -26,6 +27,7 @@ namespace SistemaEstoque.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Register() => View();
 
         [HttpPost]

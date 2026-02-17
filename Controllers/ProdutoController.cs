@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SistemaEstoque.Dtos.Produto;
 using SistemaEstoque.Models;
@@ -7,6 +8,7 @@ using SistemaEstoque.Services.Produtos;
 
 namespace SistemaEstoque.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProdutoController : Controller
     {
         private readonly IProdutoInterface _produtoInterface;

@@ -1,10 +1,12 @@
 ﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaEstoque.Dtos.Categoria;
 using SistemaEstoque.Services.Categorias;
 
 namespace SistemaEstoque.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoriaController : Controller
     {
         private readonly ICategoriaInterface _categoriaInterface;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SistemaEstoque.Models;
 using SistemaEstoque.Services.Movimentacoes;
@@ -6,6 +7,7 @@ using SistemaEstoque.Services.Produtos;
 
 namespace SistemaEstoque.Controllers
 {
+    [Authorize]
     public class MovimentacaoController : Controller
     {
         private readonly IMovimentacaoInterface _movimentacaoInterface;

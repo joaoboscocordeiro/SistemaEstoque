@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SistemaEstoque.Services.Graficos;
 
 namespace SistemaEstoque.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class GraficoController : Controller
     {
         private readonly IGraficoInterface _graficoInterface;
